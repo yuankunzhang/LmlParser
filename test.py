@@ -1,19 +1,7 @@
 from parser import LmlParser
 
 def test_happy_cases():
-    print '----- happy cases -----\n'
-
-    src = ''
-    dst = LmlParser(src).parse()
-    print 'src: %s\ndst: %s\n' % (src, dst)
-
-    src = {}
-    dst = LmlParser(src).parse()
-    print 'src: %s\ndst: [Empty dict]\n' % src
-
-    src = 'this is a string'
-    dst = LmlParser(src).parse()
-    print 'src: %s\ndst: %s\n' % (src, dst)
+    print '---------- happy cases ----------\n'
 
     src = '    { key = this is a string}   '
     dst = LmlParser(src).parse()
@@ -23,8 +11,16 @@ def test_happy_cases():
     dst = LmlParser(src).parse()
     print 'src: %s\ndst: %s\n' % (src, dst)
 
+    src = '{track={inside2={inside3=value3}}, inside1=value1}'
+    dst = LmlParser(src).parse()
+    print 'src: %s\ndst: %s\n' % (src, dst)
+
+    src = '{track={inside2={inside3=value3}}, inside1=value1,}'
+    dst = LmlParser(src).parse()
+    print 'src: %s\ndst: %s\n' % (src, dst)
+
 def test_bitch_cases():
-    print '----- bitch cases -----\n'
+    print '---------- bitch cases ----------\n'
 
     src = '{abcd'
     print 'src: %s' % src
@@ -33,7 +29,6 @@ def test_bitch_cases():
     except ValueError, e:
         print e
 
-    # TODO
     src = 'abcd}'
     print 'src: %s' % src
     try:
@@ -41,16 +36,7 @@ def test_bitch_cases():
     except ValueError, e:
         print e
 
-    # TODO
-    src = 'abcd,'
-    print 'src: %s' % src
-    try:
-        LmlParser(src).parse()
-    except ValueError, e:
-        print e
-
-    # TODO
-    src = 'abcd='
+    src = '{track={inside2={inside3=value3}, inside1=value1}'
     print 'src: %s' % src
     try:
         LmlParser(src).parse()
