@@ -17,5 +17,18 @@ string is defined below.
 For example, this is a valid source string:
 
 ```
-{product1={id=gold1, price=13}, product2={id=gold2, price=26}}
+{
+    product1={
+        id=gold1,
+        price=13,
+        items={
+            items1=sword,
+            items2=axe
+        }
+    },
+    product2={
+        id=gold2,
+        price=26
+    }
+}
 ```
