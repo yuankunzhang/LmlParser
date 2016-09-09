@@ -61,10 +61,11 @@ class LmlParser:
     def parse_string(self):
         '''Parse a string value.'''
 
-        s = ''
-        while self.ch != '=' and self.ch != ',' and self.ch != '}' and self.at < len(self.source):
-            s += self.ch
+        s_list = []
+        while self.ch not in ('=', ',', '}') and self.at < len(self.source):
+            s_list.append(self.ch)
             self.next_char()
+        s = ''.join(s_list)
         return s.strip()
 
     def parse_object(self):
