@@ -1,9 +1,11 @@
 # LML Parser
 
-AWS's API gateway does some black magic to perfectly mess up our JSON data.
+## Description
+
+The AWS API Gateway does some black magic to perfectly mess up our JSON data.
 That's why we need this parse_valuer to save the world.
 
-It parse_values a source string to a Python dictionary. Format of the source
+It parse a source string to a Python dictionary. Format of the source
 string is defined below.
 
 * The source string begins with a '{', leading white spaces are allowed.
@@ -31,4 +33,12 @@ For example, this is a valid source string:
         price=26
     }
 }
+```
+## Usage
+
+```python
+source = "THE-SOURCE-STRING"
+output = LmlParser(source).parse()
+
+print output
 ```
