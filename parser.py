@@ -34,6 +34,17 @@ class LmlParser:
         print '-- Parser abort due to a fatal error: \n-- %s' % msg
         raise ValueError()
 
+    def look_ahead(self):
+        '''Adopt orphan commas'''
+        forward = self.at
+        for i in range(self.at, len(self.source)):
+            if self.source[i] == '{' or self.source[i] == '}' or self.source[i] == '=':
+                break
+            elif self.source[i] == ',':
+                forward = i
+        return forward
+
+
     def check_char(self, expected):
         '''
         Check if current character is same as the given character.
@@ -86,6 +97,14 @@ class LmlParser:
             self.check_char('=')
             self.next_char()
             val = self.parse_value()
+
+            # Adopt orphan commas
+            forward = self.look_ahead()
+            if forward > self.at:
+                val += self.source[self.at: forward]
+                self.at = forward
+                self.ch = self.source[forward]
+
             obj[key] = val
             # eat ','
             if self.ch == ',':

@@ -19,6 +19,10 @@ def test_happy_cases():
     dst = LmlParser(src).parse()
     print 'src: %s\ndst: %s\n' % (src, dst)
 
+    src = '{key1=val1,and,what,the,fuck,key2=val2}'
+    dst = LmlParser(src).parse()
+    print 'src: %s\ndst: %s\n' % (src, dst)
+
 def test_bitch_cases():
     print '---------- bitch cases ----------\n'
 
